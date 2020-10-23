@@ -13,6 +13,7 @@
         :key="twoot.id"
         :username="user.username"
         :twoot="twoot"
+        @favorite="toggleFavorite"
       />
     </div>
   </div>
@@ -61,6 +62,9 @@ export default {
   methods: {
     followUser() {
       this.followers++;
+    },
+    toggleFavorite(id) {
+      console.log(`Favorited Tweet #${id}`);
     },
   },
   mounted() {
