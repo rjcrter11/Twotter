@@ -106,37 +106,39 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="scss">
 .user-profile {
   display: grid;
   grid-template-columns: 1fr 3fr;
   width: 100%;
   padding: 50px 5%;
-}
 
-.user-profile_user-panel {
-  display: flex;
-  flex-direction: column;
-  margin-right: 50px;
-  padding: 20px;
-  background-color: white;
-  border-radius: 5px;
-  border: 1px solid #dfe3e8;
-}
-.user-profile_admin-badge {
-  background-color: rebeccapurple;
-  color: white;
-  border-radius: 5px;
-  margin-right: auto;
-  padding: 0 10px;
-  font-weight: bold;
-}
-.user-profile_create-twoot {
-  display: flex;
-  flex-direction: column;
-  padding-top: 20px;
-}
-h1 {
-  margin: 0;
+  .user-profile_user-panel {
+    display: flex;
+    flex-direction: column;
+    margin-right: 50px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid #dfe3e8;
+
+    h1 {
+      margin: 0;
+    }
+
+    .user-profile_admin-badge {
+      background-color: rebeccapurple;
+      color: white;
+      border-radius: 5px;
+      margin-right: auto;
+      padding: 0 10px;
+      font-weight: bold;
+    }
+  }
+  .user-profile_create-twoot {
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+  }
 }
 </style>
