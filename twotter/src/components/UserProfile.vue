@@ -6,8 +6,14 @@
       <div class="user-profile_follower-count">
         <strong> Followers: </strong> {{ followers }}
       </div>
-      <form class="user-profile_create-twoot" @submit.prevent="createNewTwoot">
-        <label for="newTwoot"> <strong>New Twoot</strong> </label>
+      <form
+        class="user-profile_create-twoot"
+        :class="{ '--exceeded': newTwootCharacterCount > 180 }"
+        @submit.prevent="createNewTwoot"
+      >
+        <label for="newTwoot">
+          <strong>New Twoot</strong> ({{ newTwootCharacterCount }}/180)
+        </label>
         <textarea id="newTwoot" rows="4" v-model="newTwootContent" />
 
         <div class="user-profile_create-twoot-type">
@@ -82,6 +88,9 @@ export default {
     fullName() {
       return `${this.user.firstName} ${this.user.lastName} `;
     },
+    newTwootCharacterCount() {
+      return this.newTwootContent.length;
+    },
   },
   methods: {
     followUser() {
@@ -91,12 +100,18 @@ export default {
       console.log(`Favorited Tweet #${id}`);
     },
     createNewTwoot() {
-      if (this.newTwootContent && this.selectedTwootType !== "draft") {
+      if (
+        this.newTwootContent &&
+        this.selectedTwootType !== "draft" &&
+        this.newTwootCharacterCount <= 180
+      ) {
         this.user.twoots.unshift({
           id: this.user.twoots.length + 1,
           content: this.newTwootContent,
         });
         this.newTwootContent = "";
+      } else if (this.newTwootCharacterCount > 180) {
+        alert("Character count must be 180 characters or fewer!");
       }
     },
   },
@@ -139,6 +154,16 @@ export default {
     display: flex;
     flex-direction: column;
     padding-top: 20px;
+
+    &.--exceeded {
+      color: red;
+      border-color: red;
+      button {
+        background-color: red;
+        border: none;
+        color: white;
+      }
+    }
   }
 }
 </style>
